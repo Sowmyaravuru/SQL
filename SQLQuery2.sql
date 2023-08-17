@@ -1,0 +1,354 @@
+
+--CREATING A TABLE 1
+----create table Employee_Demographics(
+----EmployeeID int,
+----Firstname varchar(50),
+----Lastname varchar(50),
+----Age int,
+--Gender varchar(50))
+
+--CREATING A TABLE 2
+--create table Employee_Salary(
+--EmployeeID int,
+--Jobtitle varchar(50),
+--Salary int)
+
+--Inserting values into table
+--Insert into Employee_Demographics VALUES
+--(1001, 'Jim', 'Halpert', 30, 'Male'),
+--(1002, 'Pam', 'Beasley', 30, 'Female'),
+--(1003, 'Dwight', 'Schrute', 29, 'Male'),
+--(1004, 'Angela', 'Martin', 31, 'Female'),
+--(1005, 'Toby', 'Flenderson', 32, 'Male'),
+--(1006, 'Michael', 'Scott', 35, 'Male'),
+--(1007, 'Meredith', 'Palmer', 32, 'Female'),
+--(1008, 'Stanley', 'Hudson', 38, 'Male'),
+--(1009, 'Kevin', 'Malone', 31, 'Male')
+
+--insert into Employee_Salary values
+--(1002, 'Receptionist', 36000),
+--(1003, 'Salesman', 63000),
+--(1004, 'Accountant', 47000),
+--(1005, 'HR', 50000),
+--(1006, 'Regional Manager', 65000),
+--(1007, 'Supplier Relations', 41000),
+--(1008, 'Salesman', 48000),
+--(1009, 'Accountant', 42000)
+
+--select * from Employee_Demographics
+--select Firstname from Employee_Demographics
+--Select  distinct(EmployeeID) from Employee_Demographics
+--select COUNT(EmployeeID) from Employee_Demographics
+--Select COUNT(Lastname) from Employee_Demographics as lastnamecount
+
+--Select * from Employee_Salary
+--select MAX(salary) from Employee_Salary
+--select Min(salary) from Employee_Salary
+--select	avg(salary) from Employee_Salary
+
+--select * from Employee_Demographics
+------where Firstname = 'Jim'
+------where Firstname <> 'Jim'
+----where Age <=32
+----where Age <=32 and Gender= 'Male'
+--where Age <=32 or Gender= 'Male'
+
+--Wildcards
+
+--select * from Employee_Demographics
+----where Lastname like'S%'
+----where Lastname like'%S%'
+--where Lastname like'%S%O%'
+
+--NOTNULL
+--Select * from Employee_Demographics
+--where Firstname is not null
+
+--in
+--select * from Employee_Demographics
+--where EmployeeID in (1001,1002,1004,1006)
+
+--GROUP BY
+--select * from Employee_Demographics
+ --Select gender, avg(Age) as avgage from Employee_Demographics
+ --group by Gender
+
+ --select gender, Age , count(gender)
+ --from Employee_Demographics
+ --group by Gender,Age
+
+ -- select gender, count(gender)
+ --from Employee_Demographics
+ --where Age >30
+ --group by Gender
+
+ ----order by 
+ --select gender, count(gender) as countofgender
+ --from Employee_Demographics
+ --where Age >30
+ --group by Gender
+ --order by countofgender desc
+
+ --JOINS
+ --select * from Employee_Demographics
+ --inner join Employee_Salary
+ --on Employee_Demographics.EmployeeID=Employee_Salary.EmployeeID
+
+
+
+-- Insert into Employee_Demographics VALUES
+--(1011, 'Ryan', 'Howard', 26, 'Male'),
+--(NULL, 'Holly','Flax', NULL, 'Male'),
+--(1013, 'Darryl', 'Philbin', NULL, 'Male')
+
+--Insert into Employee_Salary VALUES
+--(1010, NULL, 47000),
+--(NULL, 'Salesman', 43000)
+
+  --select * from Employee_Demographics
+ --full outer  join Employee_Salary
+ --on Employee_Demographics.EmployeeID=Employee_Salary.EmployeeID
+
+ 
+ -- select   Jobtitle,AVG(salary) from Employee_Demographics
+ --inner  join Employee_Salary
+ --on Employee_Demographics.EmployeeID=Employee_Salary.EmployeeID
+ --group by Jobtitle
+
+ --UNION
+
+-- Insert into Employee_Demographics VALUES
+--(1011, 'Ryan', 'Howard', 26, 'Male'),
+--(NULL, 'Holly', 'Flax', NULL, NULL),
+--(1013, 'Darryl', 'Philbin', NULL, 'Male')
+
+--Create Table WareHouse_EmployeeDemographics 
+--(EmployeeID int, 
+--FirstName varchar(50), 
+--LastName varchar(50), 
+--Age int, 
+--Gender varchar(50)
+--)
+
+--Insert into WareHouse_EmployeeDemographics VALUES
+--(1013, 'Darryl', 'Philbin', NULL, 'Male'),
+--(1050, 'Roy', 'Anderson', 31, 'Male'),
+--(1051, 'Hidetoshi', 'Hasagawa', 40, 'Male'),
+--(1052, 'Val', 'Johnson', 31, 'Female')
+
+--select * from WareHouse_EmployeeDemographics
+
+--select * from Employee_Demographics
+--full outer join WareHouse_EmployeeDemographics 
+--on Employee_Demographics.EmployeeID = WareHouse_EmployeeDemographics.EmployeeID
+
+--select * from Employee_Demographics
+--union
+--select * from WareHouse_EmployeeDemographics
+
+--select * from Employee_Demographics
+--union all 
+--select * from WareHouse_EmployeeDemographics
+--order by EmployeeID;
+
+--case statement
+--select Firstname,Lastname,Age ,
+--case 
+--when age > 30 then 'old'
+--when age between 27 and 30 then 'young'
+--else 'baby'
+--end as agegroup
+--from Employee_Demographics
+--where age is not null
+--order by Age
+
+--select Firstname,Lastname,Jobtitle,Salary,
+--case 
+--     when Jobtitle ='Salesman' then Salary+(Salary*0.10)
+--	 when Jobtitle ='Accountant' then Salary+(Salary*0.005)
+--	 when Jobtitle= 'HR' then Salary+(Salary*0.060)
+--	 else Salary+(salary*0.5)
+--end as Bonus
+--from Employee_Demographics
+--join Employee_Salary on Employee_Demographics.EmployeeID=Employee_Salary.EmployeeID
+
+--select jobtitle,count(Jobtitle) from Employee_Demographics
+--join Employee_Salary on Employee_Demographics.EmployeeID=Employee_Salary.EmployeeID
+--group by Jobtitle
+--having COUNT(Jobtitle) >1
+
+--select jobtitle,avg(salary) from Employee_Demographics
+--join Employee_Salary on Employee_Demographics.EmployeeID=Employee_Salary.EmployeeID
+--group by Jobtitle
+--having avg(salary)>50000
+--order by AVG(salary)
+
+------Update/delete/insert
+ --select * from Employee_Demographics
+
+ --update Employee_Demographics
+ --set EmployeeID=1012 , age =31 ,Gender= 'Male'
+ --where Firstname='Holly' and Lastname = 'Flax'
+
+ --delete from Employee_Demographics
+ --where EmployeeID =1013
+
+ --Alias
+
+ --select Firstname +' '+ Lastname as fullname
+ --from Employee_Demographics
+
+ ------Partition by
+  --select Firstname,Lastname,Gender,salary from Employee_Demographics demo
+  --join Employee_Salary sal on demo.EmployeeID=sal.EmployeeID
+
+  --  select Firstname,Lastname,Gender,salary , count(gender) from Employee_Demographics demo
+  --join Employee_Salary sal on demo.EmployeeID=sal.EmployeeID
+  --group by gender,Firstname,Lastname,Salary
+
+  -- select Gender,count(gender) from Employee_Demographics demo
+  --join Employee_Salary sal on demo.EmployeeID=sal.EmployeeID
+  --group by gender
+
+  -- select Firstname,Lastname,Gender,salary ,count(gender) over (partition by gender) from Employee_Demographics demo
+  --join Employee_Salary sal on demo.EmployeeID=sal.EmployeeID
+
+  -- select Firstname,Lastname,Gender,salary ,count(gender)  over (partition by gender) as countofgender , avg(salary) over (partition by gender) as avgsalary from Employee_Demographics demo
+  --join Employee_Salary sal on demo.EmployeeID=sal.EmployeeID
+  --where Salary>45000
+
+  ----Common table expression
+  --with cte as 
+  --( select Firstname,Lastname,Gender,salary ,count(gender)  over (partition by gender) as countofgender , avg(salary) over (partition by gender) as avgsalary from Employee_Demographics demo
+  --join Employee_Salary sal on demo.EmployeeID=sal.EmployeeID
+  --where Salary>45000)
+  --select * from cte
+
+  ------Temporary Tables - Temp Tables
+  -- create table #temp_Employee(
+  -- Employeeid int,
+  -- Jobtitle varchar(100),
+  -- Salary int)
+
+  -- select * from #temp_Employee
+
+ --   insert into #temp_Employee
+	--select * from Employee_Salary
+
+--	DROP TABLE IF EXISTS #temp_employee3
+--Create table #temp_employee3 (
+--JobTitle varchar(100),
+--EmployeesPerJob int ,
+--AvgAge int,
+--AvgSalary int
+--)
+
+
+--Insert into #temp_employee3
+--SELECT JobTitle, Count(JobTitle), Avg(Age), AVG(salary)
+--FROM Employee_Demographics emp
+--JOIN Employee_Salary sal
+--	ON emp.EmployeeID = sal.EmployeeID
+--group by JobTitle
+
+--Select * 
+--From #temp_employee3
+
+--SELECT AvgAge * AvgSalary
+--from #temp_employee3
+  
+--String Functions - TRIM, LTRIM, RTRIM, Replace, Substring, Upper, Lower
+
+--CREATE TABLE EmployeeErrors (
+--EmployeeID varchar(50)
+--,FirstName varchar(50)
+--,LastName varchar(50)
+--)
+
+--Insert into EmployeeErrors Values 
+--('1001  ', 'Jimbo', 'Halbert')
+--,('  1002', 'Pamela', 'Beasely')
+--,('1005', 'TOby', 'Flenderson - Fired')
+
+--Select *
+--From EmployeeErrors
+
+--Select EmployeeID, TRIM(employeeID) AS IDTRIM
+--FROM EmployeeErrors 
+
+--Select EmployeeID, RTRIM(employeeID) as IDRTRIM
+--FROM EmployeeErrors 
+
+--Select EmployeeID, LTRIM(employeeID) as IDLTRIM
+--FROM EmployeeErrors 
+
+-- Select LastName, REPLACE(LastName, '- Fired', '') as LastNameFixed
+--FROM EmployeeErrors
+
+--Select firstname, LOWER(firstname)
+--from EmployeeErrors
+
+------Select Firstname, UPPER(FirstName)
+------from EmployeeErrors
+
+--Select Substring(err.FirstName,1,3), Substring(dem.FirstName,1,3), Substring(err.LastName,1,3), Substring(dem.LastName,1,3)
+--FROM EmployeeErrors err
+--JOIN Employee_Demographics dem
+--	on Substring(err.FirstName,1,3) = Substring(dem.FirstName,1,3)
+--	and Substring(err.LastName,1,3) = Substring(dem.LastName,1,3)
+
+
+--Stored procedure
+
+--Create procedure test 
+--as 
+--select * from Employee_Demographics
+
+--Exec test
+
+--create procedure temp_employee1
+--as
+-- Create table #temp_employee1(
+--JobTitle varchar(100),
+--EmployeesPerJob int ,
+--AvgAge int,
+--AvgSalary int
+--)
+
+
+--Insert into #temp_employee1
+--SELECT JobTitle, Count(JobTitle), Avg(Age), AVG(salary)
+--FROM Employee_Demographics emp
+--JOIN Employee_Salary sal
+--	ON emp.EmployeeID = sal.EmployeeID
+--group by JobTitle
+
+--Select * 
+----From #temp_employee1
+
+--exec temp_employee1
+
+--exec temp_employee1 @Jobtitle = 'Salesman'
+
+--Subqueries
+
+--Subqueries (in the Select, From, and Where Statement)
+--Select EmployeeID, JobTitle, Salary
+--From Employee_Salary
+
+--Select EmployeeID, Salary, (Select AVG(Salary) From Employee_Salary) as AllAvgSalary
+--From Employee_Salary
+
+-- How to do it with Partition By
+--Select EmployeeID, Salary, AVG(salary) over() as AllAvgSalary
+--From Employee_Salary
+
+--select a.EmployeeID , AllAvgSalary
+--from
+--(Select EmployeeID, Salary, AVG(salary) over() as AllAvgSalary
+--From Employee_Salary) a
+
+
+----Subquery in Where
+--select EmployeeID,Jobtitle,Salary  from Employee_Salary
+--where EmployeeID in ( select employeeID from Employee_Demographics where Age>30)
